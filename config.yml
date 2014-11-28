@@ -5,7 +5,9 @@ database:
   driver_class: org.h2.Driver
 
   # the username
-  user: sa
+  user:
+
+  password:
 
   # the JDBC URL
   url: jdbc:h2:userrest
@@ -19,3 +21,5 @@ server:
   admin_connectors:
     - type: http
       port: 8889
+
+endpoint: http://localhost:8888/

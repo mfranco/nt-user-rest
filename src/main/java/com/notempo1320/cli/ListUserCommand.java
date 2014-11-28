@@ -17,6 +17,7 @@ import io.dropwizard.cli.ConfiguredCommand;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import java.io.*;
+import java.util.List;
 import net.sourceforge.argparse4j.impl.Arguments;
 import net.sourceforge.argparse4j.inf.Namespace;
 import net.sourceforge.argparse4j.inf.Subparser;
@@ -24,15 +25,15 @@ import org.hibernate.cfg.AnnotationConfiguration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CreateUserCommand extends ConfiguredCommand<AppConfiguration> {
+public class ListUserCommand extends ConfiguredCommand<AppConfiguration> {
 
     private static final Logger LOGGER =
-        LoggerFactory.getLogger(CreateUserCommand.class);
+        LoggerFactory.getLogger(ListUserCommand.class);
 
     private GuiceBundle<AppConfiguration> guiceBundle;
 
-    public CreateUserCommand() {
-        super("create_user", "Create a user that can access the app");
+    public ListUserCommand() {
+        super("list_users", "List all admin users");
 
 
     }
@@ -40,8 +41,6 @@ public class CreateUserCommand extends ConfiguredCommand<AppConfiguration> {
     @Override
     public void configure(Subparser subparser) {
         super.configure(subparser);
-        subparser.addArgument("-u", "--username")
-                 .help("admin username");
     }
 
 
@@ -59,30 +58,14 @@ public class CreateUserCommand extends ConfiguredCommand<AppConfiguration> {
                 new UserHibernateDAO(factory);
             final UserFacade facade = new UserFacade(dao);
 
-            String username = namespace.getString("username");
-            String pass1;
-            String pass2;
-            User obj = new User();
 
             factory.getCurrentSession().beginTransaction();
-            System.out.print("\n Creating user: \n");
-            System.out.print("\n type your username: \n");
-            BufferedReader in = new BufferedReader(
-                new InputStreamReader(System.in));
-            obj.setUsername(in.readLine());
+            System.out.print("\n Admin User List \n");
 
-            System.out.print("\n type your email: ");
-            in = new BufferedReader(new InputStreamReader(System.in));
-            obj.setEmail(in.readLine());
-
-            obj.setToken(obj.randomUUID().toString());
-
-            User createdUser = dao.create(obj);
-            factory.getCurrentSession().getTransaction().commit();
-            System.out.print("\nUser successfully created:\n");
-
+            List<User> users = facade.findByParams(
+                Optional.fromNullable(null));
             StringWriter writer = new StringWriter();
-            bootstrap.getObjectMapper().writeValue(writer, createdUser);
+            bootstrap.getObjectMapper().writeValue(writer, users);
             System.out.print(writer.toString());
             System.out.print("\n");
             System.exit(0);

@@ -14,13 +14,14 @@ public class HibernateConfig {
 
     public static AnnotationConfiguration getConfig(AppConfiguration config) {
         HibernateConfig.dataSourceFactory = config.getDataSourceFactory();
-        dbConfig.setProperty("hibernate.connection.url", HibernateConfig.dataSourceFactory.getUrl());
+        dbConfig.setProperty("hibernate.connection.url",
+            HibernateConfig.dataSourceFactory.getUrl());
         dbConfig.setProperty("hibernate.connection.driver_class",
             HibernateConfig.dataSourceFactory.getDriverClass());
         dbConfig.setProperty("hibernate.current_session_context_class",
             "thread");
-        dbConfig.setProperty("hibernate.show_sql", "true");
-        dbConfig.setProperty("hibernate.hbm2ddl.auto", "create");
+        dbConfig.setProperty("hibernate.show_sql", "false");
+        dbConfig.setProperty("hibernate.hbm2ddl.auto", "update");
         return dbConfig;
 
     }

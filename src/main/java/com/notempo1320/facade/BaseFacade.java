@@ -5,6 +5,7 @@ import com.notempo1320.model.BaseModel;
 import java.util.List;
 import java.util.Map;
 
+
 public interface BaseFacade<T extends BaseModel> {
 
     public T create(T obj);

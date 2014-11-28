@@ -1,5 +1,6 @@
 package com.notempo1320.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -20,52 +21,58 @@ public class Person extends BaseModel {
     @Column
     private Long    id;
 
-    @Column(name = "email")
+    @Column
     @NotNull @Length(min = 8)
     private String email;
 
-    @Column(name = "username")
+    @Column
     @NotNull @Length(min = 8)
     private String username;
 
-    @Column(name = "token")
-    @NotNull
+    @Column
     private String token;
 
-    @Column(name = "first_name")
+    @Column(name="first_name")
     private String firstName;
 
-    @Column(name = "last_name")
+    @Column(name="last_name")
     private String lastName;
 
-    @Column(name = "is_active")
+    @Column
     @NotNull
     private boolean active;
 
+    @JsonProperty
     public Long getId() {
         return id;
     }
 
+    @JsonProperty
     public String getUsername() {
         return this.username;
     }
 
+    @JsonProperty
     public String getEmail() {
         return this.email;
     }
 
+    @JsonProperty
     public String getToken() {
         return this.token;
     }
 
+    @JsonProperty
     public String getFirstName() {
         return this.firstName;
     }
 
+    @JsonProperty
     public String getLastName() {
         return this.lastName;
     }
 
+    @JsonProperty
     public boolean getActive() {
         return this.active;
     }

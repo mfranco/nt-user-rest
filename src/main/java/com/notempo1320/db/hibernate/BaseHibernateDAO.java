@@ -10,9 +10,14 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.SessionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 abstract public class BaseHibernateDAO<T> extends AbstractDAO <T> {
+
+    private static final Logger LOGGER =
+        LoggerFactory.getLogger(BaseHibernateDAO.class);
 
     public BaseHibernateDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
@@ -25,7 +30,7 @@ abstract public class BaseHibernateDAO<T> extends AbstractDAO <T> {
     public List<T> findByParams(
         Optional<Map<String, Object>> params) {
         Criteria criteria = criteria();
-
+        LOGGER.info("Executing findByParams");
         if(params.isPresent()) {
 
             Map<String, Object> mapParams = params.get();

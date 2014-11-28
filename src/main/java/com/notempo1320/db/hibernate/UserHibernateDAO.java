@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import org.hibernate.SessionFactory;
 
-
 public class UserHibernateDAO extends BaseHibernateDAO<User>
     implements GenericDAO<User>
     {

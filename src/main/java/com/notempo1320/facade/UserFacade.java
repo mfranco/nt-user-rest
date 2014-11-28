@@ -6,6 +6,7 @@ import com.notempo1320.model.User;
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class UserFacade implements BaseFacade<User> {
     private GenericDAO<User> dao;
@@ -38,5 +39,6 @@ public class UserFacade implements BaseFacade<User> {
     public long count() {
         return dao.count();
     }
+
 
 }

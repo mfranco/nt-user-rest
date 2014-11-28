@@ -20,6 +20,7 @@ public class PersonHibernateDAO extends BaseHibernateDAO<Person>
 
     @Override
     public Person create(Person obj){
+        obj.setToken(obj.randomUUID().toString());
         return persist(obj);
     }
 

@@ -1,5 +1,6 @@
 package com.notempo1320.model;
 
+
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -22,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 
 
 public class User extends BaseModel {
-    @Id
+   @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column
     private Long    id;
@@ -42,6 +43,7 @@ public class User extends BaseModel {
     @Column(name = "is_active")
     @NotNull
     private boolean active;
+
 
     public Long getId() {
         return id;
@@ -78,4 +80,5 @@ public class User extends BaseModel {
     public void setActive(boolean active) {
         this.active = active;
     }
+
 }
